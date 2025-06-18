@@ -25,7 +25,7 @@ export const SelectBrand = ({
     return (
         <div className="w-full px-4">
             <div className="w-full flex flex-col items-start justify-center">
-                <h3 className="text-2xl text-start font-bold">Газированные напитки</h3>
+                <h1 className="text-2xl text-start font-bold">Газированные напитки</h1>
             </div>
             <div className="w-full flex flex-col items-start justify-center mt-6">
                 <label htmlFor="brand-select">Выберите бренд:</label>

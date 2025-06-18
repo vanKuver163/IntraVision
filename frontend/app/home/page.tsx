@@ -35,7 +35,7 @@ const HomePage = () => {
 
     return (
         <div className="w-full border-2 border-black flex flex-col items-start justify-start p-4 ">
-            <div className="w-full flex flex-row items-end justify-center-4">
+            <div className="w-full flex flex-row items-end justify-center">
                 <div className="flex-1 flex-col items-center justify-center">
                     <SelectBrand selectedBrand={filters.brandId ?? null}
                                  onBrandSelectAction={handleBrandSelect}/>

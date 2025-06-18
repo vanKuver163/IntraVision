@@ -3,6 +3,7 @@ import * as XLSX from 'xlsx';
 import {Product} from "@/app/features/product/type";
 import {useAppSelector} from "@/app/hooks";
 import {selectTotalItems, selectTotalPrice} from "@/app/features/cart/cartSlice";
+import Link from "next/link";
 
 interface ButtonPanelProps {
     products: Product[];
@@ -41,11 +42,14 @@ export const ButtonPanel = ({products}: ButtonPanelProps) => {
                 </button>
             </div>
             <div className="w-full flex-1 flex-col items-end justify-center mt-10">
-                <button className="w-full bg-green-500 p-2 rounded-xl cursor-pointer hover:bg-green-600 transition-colors">
-                    <p className="text-white font-semibold">
-                        В корзине: {totalItems} товара на {totalPrice} руб.
-                    </p>
-                </button>
+                <Link href="/order" className="w-full">
+                    <button
+                        className="w-full bg-green-500 p-2 rounded-xl cursor-pointer hover:bg-green-600 transition-colors">
+                        <p className="text-white font-semibold">
+                            В корзине: {totalItems} товара на {totalPrice} руб.
+                        </p>
+                    </button>
+                </Link>
             </div>
         </div>
     );
