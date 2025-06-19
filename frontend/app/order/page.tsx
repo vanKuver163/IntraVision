@@ -26,20 +26,16 @@ const OrderPage = () => {
                 </div>
             }
             <div className="w-full flex flex-row items-center justify-center gap-2 md:gap-4">
-                <div className="flex-1">
-                    <Link href="/home" className="w-full">
-                        <button
-                            className="p-2 w-full max-w-[200px] bg-yellow-400 hover:bg-yellow-500 cursor-pointer rounded-xl">
+                <div className="flex-1 flex flex-col items-start">
+                    <Link href="/home" className="p-2 w-full max-w-[200px] flex flex-row items-center justify-center bg-yellow-400 hover:bg-yellow-500 cursor-pointer rounded-xl">
                             <p className="text-sm font-semibold">Вернуться</p>
-                        </button>
                     </Link>
                 </div>
                 {totalPrice !== 0 &&
                     <div className="flex-1 flex flex-col items-end">
-                        <button
-                            className="p-2 w-full max-w-[200px] bg-green-500 hover:bg-green-600 cursor-pointer rounded-xl">
-                            <p className="text-sm text-white font-semibold">Оплата</p>
-                        </button>
+                        <Link href="/payment"  className="p-2 w-full flex flex-row items-center justify-center max-w-[200px] bg-green-500 hover:bg-green-600 cursor-pointer rounded-xl">
+                            <p className="text-sm t text-white font-semibold">Оплата</p>
+                        </Link>
                     </div>
                 }
             </div>

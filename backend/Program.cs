@@ -33,6 +33,9 @@ builder.Services.AddScoped<IBrandService, BrandService>();
 builder.Services.AddScoped<IRepository<Product>, Repository<Product>>();
 builder.Services.AddScoped<IProductService, ProductService>();
 
+builder.Services.AddScoped<IRepository<Coin>, Repository<Coin>>();
+builder.Services.AddScoped<ICoinService, CoinService>();
+
 
 var app = builder.Build();
 
