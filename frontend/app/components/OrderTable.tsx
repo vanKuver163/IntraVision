@@ -2,6 +2,7 @@
 import {useAppSelector} from "@/app/hooks";
 import {selectCartItems} from "@/app/features/cart/cartSlice";
 import {OrderItem} from "@/app/components/OrderItem";
+import React from "react";
 
 export const OrderTable = () => {
     const orderItems = useAppSelector(selectCartItems);
@@ -22,6 +23,9 @@ export const OrderTable = () => {
                     orderItems.map((orderItem) => (<OrderItem key={orderItem.product.id} orderItem={orderItem}/>))}
                 </tbody>
             </table>
+            <div className="w-full my-6 ">
+                <hr className=" w-full border-gray-300"/>
+            </div>
         </div>
     )
 }
