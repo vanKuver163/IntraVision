@@ -49,6 +49,7 @@ public class SeedData
                     {
                         Name = "Coca-Cola в банке",
                         Price = 100,
+                        Quantity = 10,
                         BrandId = brands["Coca-Cola"],
                         ImagePath = "/Images/Coca-Cola.jpg"
                     },
@@ -56,6 +57,7 @@ public class SeedData
                     {
                         Name = "Coca-Cola в бутылке",
                         Price = 115,
+                        Quantity = 5,
                         BrandId = brands["Coca-Cola"],
                         ImagePath = "/Images/Coca-Cola-Bottle.jpg"
                     },
@@ -63,6 +65,7 @@ public class SeedData
                     {
                         Name = "Pepsi в банке",
                         Price = 90,
+                        Quantity = 16,
                         BrandId = brands["Pepsi"],
                         ImagePath = "/Images/Pepsi.jpg"
                     },
@@ -70,6 +73,7 @@ public class SeedData
                     {
                         Name = "DrPepper вишневый",
                         Price = 85,
+                        Quantity = 10,
                         BrandId = brands["DrPepper"],
                         ImagePath = "/Images/DrPepper.jpg"
                     },
@@ -77,6 +81,7 @@ public class SeedData
                     {
                         Name = "DrPepper Zero",
                         Price = 83,
+                        Quantity = 10,
                         BrandId = brands["DrPepper"],
                         ImagePath = "/Images/DrPepper-Zero.jpg"
                     },
@@ -84,6 +89,7 @@ public class SeedData
                     {
                         Name = "Лимонад",
                         Price = 72,
+                        Quantity = 17,
                         BrandId = brands["Star Bar"],
                         ImagePath = "/Images/Lemonade.jpg"
                     },
@@ -91,6 +97,7 @@ public class SeedData
                     {
                         Name = "Дюшес",
                         Price = 76,
+                        Quantity = 20,
                         BrandId = brands["Star Bar"],
                         ImagePath = "/Images/Duchess.jpg"
                     },
@@ -98,6 +105,7 @@ public class SeedData
                     {
                         Name = "Тархун",
                         Price = 70,
+                        Quantity = 7,
                         BrandId = brands["Star Bar"],
                         ImagePath = "/Images/Tarragon.jpg"
                     }

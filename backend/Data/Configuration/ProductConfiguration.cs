@@ -27,6 +27,10 @@ public class ProductConfiguration : IEntityTypeConfiguration<Product>
             .HasColumnName("imagePath")
             .IsRequired();
         
+        builder.Property(x => x.Quantity)
+            .HasColumnName("quantity")
+            .IsRequired();
+        
         builder.Property(x => x.BrandId)
             .HasColumnName("brandId")
             .IsRequired();
