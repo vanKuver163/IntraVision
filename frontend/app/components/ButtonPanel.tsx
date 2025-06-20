@@ -19,7 +19,6 @@ export const ButtonPanel = ({products}: ButtonPanelProps) => {
             'Название': product.name,
             'Бренд': product.brand?.name || '',
             'Цена': product.price,
-            'Брэнд': product.brand.name || ''
         }));
 
         const workbook = XLSX.utils.book_new();
@@ -44,7 +43,13 @@ export const ButtonPanel = ({products}: ButtonPanelProps) => {
             <div className="w-full flex-1 flex-col items-end justify-center mt-10">
                 <Link href="/order" className="w-full">
                     <button
-                        className="w-full bg-green-500 p-2 rounded-xl cursor-pointer hover:bg-green-600 transition-colors">
+                        disabled={totalItems === 0}
+                        className={`w-full bg-green-500 p-2 rounded-xl transition-colors ${
+                            totalItems === 0
+                                ? 'opacity-50 cursor-not-allowed'
+                                : 'cursor-pointer hover:bg-green-600'
+                        }`}
+                    >
                         <p className="text-white font-semibold">
                             В корзине: {totalItems} товара на {totalPrice} руб.
                         </p>

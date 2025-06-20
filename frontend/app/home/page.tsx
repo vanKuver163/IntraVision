@@ -34,27 +34,30 @@ const HomePage = () => {
     };
 
     return (
-        <div className="w-full border-2 border-black flex flex-col items-start justify-start p-4 ">
-            <div className="w-full flex flex-row items-end justify-center">
-                <div className="flex-1 flex-col items-center justify-center">
-                    <SelectBrand selectedBrand={filters.brandId ?? null}
-                                 onBrandSelectAction={handleBrandSelect}/>
+        <div className="w-full flex flex-col items-start justify-start p-4">
+            <div className="w-full flex flex-col md:flex-row items-end justify-center gap-4 mb-6">
+                <div className="w-full md:flex-1 flex flex-col items-center justify-center">
+                    <SelectBrand
+                        selectedBrand={filters.brandId ?? null}
+                        onBrandSelectAction={handleBrandSelect}
+                    />
                 </div>
-                <div className="flex-1 flex-col items-center justify-center">
+                <div className="w-full md:flex-1 flex flex-col items-center justify-center">
                     <PriceSlider
                         initialPrice={filters.minPrice ?? 0}
                         onPriceChangeAction={handlePriceChange}
                         products={products || []}
                         selectedBrand={filters.brandId ?? null}
-                        prevBrandId = {prevBrandId}
+                        prevBrandId={prevBrandId}
                     />
                 </div>
-                <div className="flex-1 flex-col items-center justify-center">
+                <div className="w-full md:flex-1 flex flex-col items-center justify-center">
                     <ButtonPanel products={products || []} />
                 </div>
             </div>
+
             <div className="w-full my-6 px-4">
-                <hr className=" w-full opacity-50"/>
+                <hr className="w-full opacity-50"/>
             </div>
             <div className="w-full px-4">
                 {isLoading ? (

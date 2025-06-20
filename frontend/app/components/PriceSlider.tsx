@@ -39,7 +39,6 @@ export const PriceSlider = ({
         }
         else{
             const prices = products.map(p => p.price);
-           // setCurrentPrice(0)
             return {
                 minPrice: 0,
                 maxPrice: Math.max(...prices)
@@ -48,8 +47,6 @@ export const PriceSlider = ({
     }, [products, selectedBrand]);
 
     useEffect(() => {
-        console.log(prevBrandId)
-        console.log(selectedBrand)
         if(prevBrandId !== null && selectedBrand === null) setCurrentPrice(0)
     }, [selectedBrand, prevBrandId]);
 

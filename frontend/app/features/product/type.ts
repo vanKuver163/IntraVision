@@ -8,3 +8,5 @@ export type Product = {
     brandId: number,
     brand: Brand,
 }
+
+

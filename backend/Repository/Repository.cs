@@ -1,5 +1,6 @@
 using System.Linq.Expressions;
 using backend.Data;
+using backend.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace backend.Repository;
@@ -25,7 +26,7 @@ public class Repository<T>(IDbContextFactory<ApplicationDbContext> dbContextFact
         query = includes.Aggregate(query, (current, include) => current.Include(include));
         return await query.ToListAsync();
     }
-
+    
     public async Task AddAsync(T entity)
     {
         await using var context = await dbContextFactory.CreateDbContextAsync();
@@ -56,4 +57,12 @@ public class Repository<T>(IDbContextFactory<ApplicationDbContext> dbContextFact
         await using var context = await dbContextFactory.CreateDbContextAsync();
         return await context.Set<T>().FirstOrDefaultAsync(predicate);
     }
+    
+    public async Task UpdateRangeAsync(IEnumerable<T> entities)
+    {
+        await using var context = await dbContextFactory.CreateDbContextAsync();
+        context.Set<T>().UpdateRange(entities);
+        await context.SaveChangesAsync();
+    }
+
 }

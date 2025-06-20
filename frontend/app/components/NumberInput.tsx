@@ -5,7 +5,7 @@ interface NumberInputProps {
     id: number;
     value: number;
     min?: number;
-    max?: number;
+    max?: number | null;
     step?: number;
     onChangeAction: (id: number, value: number) => void;
 }
@@ -15,7 +15,7 @@ export const NumberInput = ({
                                 id,
                                 value,
                                 min = 1,
-                                max = 100,
+                                max = null,
                                 step = 1,
                                 onChangeAction,
                             }: NumberInputProps) => {
@@ -31,19 +31,21 @@ export const NumberInput = ({
         setInputValue(val);
         if (/^\d*$/.test(val)) {
             const numValue = parseInt(val, 10) || min;
-            onChangeAction(id, Math.min(Math.max(numValue, min), max));
+            const upperLimit = max !== null ? Math.min(numValue, max) : numValue;
+            onChangeAction(id, Math.max(upperLimit, min));
         }
     };
 
     const handleBlur = () => {
         const numValue = parseInt(inputValue, 10) || min;
-        const clampedValue = Math.min(Math.max(numValue, min), max);
+        const upperLimit = max !== null ? Math.min(numValue, max) : numValue;
+        const clampedValue = Math.max(upperLimit, min);
         setInputValue(clampedValue.toString());
         onChangeAction(id, clampedValue);
     };
 
     const increment = () => {
-        const newValue = Math.min(value + step, max);
+        const newValue = max !== null ? Math.min(value + step, max) : value + step;
         onChangeAction(id, newValue);
     };
 
@@ -71,13 +73,13 @@ export const NumberInput = ({
                     onBlur={handleBlur}
                     className="w-12 text-center border-x outline-none px-2 py-2"
                     min={min}
-                    max={max}
+                    max={max || undefined}
                     pattern="[0-9]*"
                 />
 
                 <button
                     onClick={increment}
-                    disabled={value >= max}
+                    disabled={max !== null && value >= max}
                     className="flex items-center justify-center px-4 py-2 w-10 bg-gray-100 cursor-pointer hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                     +

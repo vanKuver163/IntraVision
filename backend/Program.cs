@@ -1,3 +1,4 @@
+using System.Text.Json;
 using backend.Data;
 using backend.Models;
 using backend.Repository;
@@ -6,7 +7,9 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()  .AddJsonOptions(options => {
+    options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+});;
 
 builder.Services.AddCors(options =>
 {
@@ -35,6 +38,11 @@ builder.Services.AddScoped<IProductService, ProductService>();
 
 builder.Services.AddScoped<IRepository<Coin>, Repository<Coin>>();
 builder.Services.AddScoped<ICoinService, CoinService>();
+
+builder.Services.AddScoped<IRepository<Order>, Repository<Order>>();
+builder.Services.AddScoped<IOrderService, OrderService>();
+
+builder.Services.AddScoped<ITransactionManager, EfTransactionManager>();
 
 
 var app = builder.Build();

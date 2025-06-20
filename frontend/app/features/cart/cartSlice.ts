@@ -49,6 +49,9 @@ const cartSlice = createSlice({
                 payload: {id, quantity},
             }),
         },
+        resetCart: (state) => {
+            return initialState;
+        },
     },
 });
 
@@ -65,5 +68,5 @@ export const selectTotalPrice = (state: RootState) =>
         (total: number, item: CartItem) => total + item.product.price * item.quantity,
         0
     );
-export const {addToCart, removeFromCart, updateQuantity} = cartSlice.actions;
+export const {addToCart, removeFromCart, updateQuantity, resetCart} = cartSlice.actions;
 export default cartSlice.reducer;
