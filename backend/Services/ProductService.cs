@@ -10,4 +10,6 @@ public class ProductService(IRepository<Product> repository) : IProductService
 
     public async Task<IEnumerable<Product>> GetProductsByBrandAsync(int brandId) =>
         await repository.GetAllAsync(p => p.BrandId == brandId, null, p => p.Brand!);
+    
+    
 }
