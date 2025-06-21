@@ -1,7 +1,7 @@
 import type {Metadata} from "next";
 import "./globals.css";
 import React from "react";
-import {Providers} from "@/app/provider";
+import {ClientRootLayout} from "@/app/components/ClientRootLayout";
 
 
 export const metadata: Metadata = {
@@ -17,9 +17,9 @@ export default function RootLayout({
     return (
         <html lang="en">
         <body>
-        <Providers>
+        <ClientRootLayout>
             {children}
-        </Providers>
+        </ClientRootLayout>
         </body>
         </html>
     )

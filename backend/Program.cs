@@ -52,6 +52,8 @@ builder.Services.AddScoped<ICoinService, CoinService>();
 builder.Services.AddScoped<IRepository<Order>, Repository<Order>>();
 builder.Services.AddScoped<IOrderService, OrderService>();
 
+builder.Services.AddSingleton<IStateService, StateService>();
+
 builder.Services.AddScoped<ITransactionManager, EfTransactionManager>();
 
 
