@@ -14,7 +14,7 @@ export const paymentApi = apiSlice.injectEndpoints({
                 method: 'POST',
                 body: paymentRequest
             }),
-            invalidatesTags: ['Coins']
+            invalidatesTags: ['Products']
         })
     }),
 });

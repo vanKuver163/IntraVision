@@ -7,6 +7,9 @@ namespace backend.Services;
 
 public class OrderService(IRepository<Order> repository, ILogger<OrderService> logger) : IOrderService
 {
+    public async Task<IEnumerable<Order>> GetOrdersAsync() =>
+        await repository.GetAllAsync(null,  o => o.OrderBy(x => x.OrderDate), o => o.Items!);
+
     public async Task<OperationResult> AddOrderAsync(List<CartItem> items, decimal orderAmount)
     {
         try

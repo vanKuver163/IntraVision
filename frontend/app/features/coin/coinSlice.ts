@@ -43,7 +43,7 @@ const coinSlice = createSlice({
                 payload: {id, quantity},
             }),
         },
-        resetBank: (state) => {
+        resetBank: () => {
             return initialState;
         },
     },

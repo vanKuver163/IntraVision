@@ -8,7 +8,7 @@ interface ProductItemsProps {
     product: Product;
 }
 
-export const ProductItems = ({ product }: ProductItemsProps) => {
+export const ProductItems = ({product}: ProductItemsProps) => {
     const dispatch = useDispatch();
     const cartItems = useAppSelector(selectCartItems);
     const imageUrl = `https://localhost:5001${product.imagePath}`
@@ -36,15 +36,22 @@ export const ProductItems = ({ product }: ProductItemsProps) => {
             <p>{product.price} руб.</p>
             <button
                 onClick={handleAddToCart}
-                disabled={isInCart}
+                disabled={isInCart || product.quantity == 0}
                 className={`w-full p-2 rounded-lg transition-colors ${
-                    isInCart
-                        ? 'bg-green-500 text-white cursor-default'
-                        : 'bg-yellow-400 hover:bg-yellow-500 cursor-pointer'
+                    product.quantity === 0
+                        ? 'bg-gray-400 text-black cursor-default'
+                        : isInCart
+                            ? 'bg-green-500 text-white cursor-default'
+                            : 'bg-yellow-400 hover:bg-yellow-500 cursor-pointer'
                 }`}
             >
                 <p className="font-semibold">
-                    {isInCart ? 'В корзине ✓' : 'Выбрать'}
+                    {product.quantity === 0
+                        ? 'Закончился'
+                        : isInCart
+                            ? 'В корзине ✓'
+                            : 'Выбрать'
+                    }
                 </p>
             </button>
         </div>

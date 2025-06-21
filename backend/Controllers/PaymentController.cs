@@ -10,6 +10,7 @@ namespace backend.Controllers;
 public class PaymentController(
     ICoinService coinService,
     IOrderService orderService,
+    IProductService productService,
     ITransactionManager transactionManager,
     ILogger<PaymentController> logger) : ControllerBase
 {
@@ -58,6 +59,9 @@ public class PaymentController(
 
                     if (!deductResult.SuccessResult)
                         return new PaymentResponse(false, []);
+
+                    var deductProductResult = await productService.DeductProductsAsync(request.Order);
+                    if (!deductProductResult.SuccessResult) return new PaymentResponse(false, []);
 
                     var orderResult = await orderService.AddOrderAsync(
                         request.Order, orderAmount);

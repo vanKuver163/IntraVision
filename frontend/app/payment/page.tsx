@@ -1,5 +1,5 @@
 'use client'
-import React from "react";
+import React, {useState} from "react";
 import {PaymentTable} from "@/app/components/PaymentTable";
 import {useAppSelector} from "@/app/hooks";
 import {resetCart, selectCartItems, selectTotalPrice} from "@/app/features/cart/cartSlice";
@@ -11,12 +11,13 @@ import {
 import Link from "next/link";
 import {useMakePaymentMutation} from "@/app/features/payment/paymentApi";
 import {useDispatch} from "react-redux";
-import { useRouter } from 'next/navigation';
+import {useRouter} from 'next/navigation';
 import {addToChange} from "@/app/features/coin/changeSlice";
 
 
 const PaymentPage = () => {
-    const [makePayment, {data, error, isLoading}] = useMakePaymentMutation();
+    const [paymentError, setPaymentError] = useState<boolean>(false);
+    const [makePayment] = useMakePaymentMutation();
     const router = useRouter();
     const dispatch = useDispatch();
     const totalPrice = useAppSelector(selectTotalPrice);
@@ -43,10 +44,9 @@ const PaymentPage = () => {
                 response.change.forEach((item) => {
                     dispatch(addToChange(item.coin, item.quantity));
                 });
-                console.log('Успешная оплата, сдача:', response.change);
                 router.push('/completion');
             } else {
-                console.error('Ошибка оплаты:');
+                setPaymentError(true)
             }
         } catch (err) {
             console.error('Непредвиденная ошибка:', err);
@@ -56,12 +56,18 @@ const PaymentPage = () => {
     return (
         <div className="w-full flex flex-col items-start justify-start p-4 ">
             <div className="w-full flex flex-col items-start justify-center">
+                {!paymentError ?
                 <h1 className="text-2xl text-start font-bold">Оплата</h1>
+                    :   <h1 className="text-2xl text-center font-bold mt-4">
+                        Извините, в данный момент мы не можем продать вам товар по причине того, что автомат не может
+                        выдать вам нужную сдачу.
+                    </h1>
+                }
             </div>
-            { totalPrice !== 0 ?
-            <PaymentTable/> :
+            {totalPrice !== 0 ?
+                <PaymentTable/> :
                 <div className="w-full flex flex-col items-center justify-center my-10">
-                <h1 className="text-2xl text-start font-bold">Вы не выбрали товар!</h1>
+                    <h1 className="text-2xl text-start font-bold">Вы не выбрали товар!</h1>
                 </div>
             }
             <div className="w-full flex flex-row items-center justify-end p-4 ">
@@ -90,6 +96,7 @@ const PaymentPage = () => {
                 }
             </div>
         </div>
+
     )
 }
 

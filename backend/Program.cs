@@ -1,4 +1,5 @@
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using backend.Data;
 using backend.Models;
 using backend.Repository;
@@ -15,8 +16,9 @@ builder.WebHost.ConfigureKestrel(serverOptions =>
     });
 });
 
-builder.Services.AddControllers()  .AddJsonOptions(options => {
+builder.Services.AddControllers().AddJsonOptions(options => {
     options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
 });;
 
 builder.Services.AddCors(options =>

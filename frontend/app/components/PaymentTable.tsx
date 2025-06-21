@@ -9,7 +9,7 @@ import {useAppSelector} from "@/app/hooks";
 
 export const PaymentTable = () => {
     const dispatch = useDispatch();
-    const {data: coins, isLoading} = useGetCoinsQuery();
+    const {data: coins, isLoading, isError} = useGetCoinsQuery();
     const coinItems = useAppSelector(selectCoinItems);
 
 
@@ -19,6 +19,22 @@ export const PaymentTable = () => {
         }
     }, [coins]);
 
+    if (isLoading) {
+        return (
+            <div className="w-full overflow-x-auto mt-4 flex justify-center items-center h-32">
+                <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+                <span className="ml-3">Загрузка данных...</span>
+            </div>
+        );
+    }
+
+    if (isError) {
+        return (
+            <div className="w-full overflow-x-auto mt-4 p-4 bg-red-100 text-red-700 rounded">
+                Произошла ошибка при загрузке данных. Пожалуйста, попробуйте позже.
+            </div>
+        );
+    }
 
     return (
         <div className="w-full overflow-x-auto mt-4">

@@ -49,7 +49,7 @@ const cartSlice = createSlice({
                 payload: {id, quantity},
             }),
         },
-        resetCart: (state) => {
+        resetCart: () => {
             return initialState;
         },
     },

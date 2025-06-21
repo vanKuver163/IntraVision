@@ -42,7 +42,7 @@ export const OrderItem = ({orderItem}: OrderItemsProps) => {
                     id={orderItem.product.id}
                     value={orderItem.quantity}
                     min={1}
-                    max={10}
+                    max={orderItem.product.quantity}
                     onChangeAction={handleUpdateQuantity}
                 />
             </td>
