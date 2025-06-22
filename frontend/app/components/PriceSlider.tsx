@@ -31,6 +31,14 @@ export const PriceSlider = ({
 
             const prices = filteredProducts.map(p => p.price);
 
+            if (prices.length === 0) {
+                setCurrentPrice(0);
+                return {
+                    minPrice: 0,
+                    maxPrice: 0,
+                };
+            }
+
             setCurrentPrice(Math.min(...prices))
             return {
                 minPrice: Math.min(...prices),
@@ -39,6 +47,14 @@ export const PriceSlider = ({
         }
         else{
             const prices = products.map(p => p.price);
+
+            if (prices.length === 0) {
+                return {
+                    minPrice: 0,
+                    maxPrice: 0,
+                };
+            }
+
             return {
                 minPrice: 0,
                 maxPrice: Math.max(...prices)
