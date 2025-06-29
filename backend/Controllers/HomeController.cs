@@ -30,18 +30,10 @@ public class HomeController(IBrandService brandService, IProductService productS
     {
         try
         {
-            IEnumerable<Product> products = brandId.HasValue
-                ? await productService.GetProductsByBrandAsync(brandId.Value)
-                : await productService.GetProductsAsync();
-
-            if (minPrice > 0)
-            {
-                products = products.Where(p => p.Price >= minPrice);
-            }
-
-            var result = products.ToList();
-            return result.Any() 
-                ? Ok(result) 
+            var products = await productService.GetFilteredProductsAsync(brandId, minPrice);
+            
+            return products.Any()
+                ? Ok(products)
                 : NotFound(GetNotFoundMessage(brandId, minPrice));
         }
         catch (Exception ex)

@@ -21,13 +21,11 @@ export const PriceSlider = ({
     const [currentPrice, setCurrentPrice] = useState<number>(initialPrice);
 
 
-    const { minPrice, maxPrice } = React.useMemo(() => {
-        if(selectedBrand !== null) {
+    const {minPrice, maxPrice} = React.useMemo(() => {
+        if (selectedBrand !== null) {
             let filteredProducts = products;
 
-            if (selectedBrand) {
-                filteredProducts = products.filter(p => p.brandId === selectedBrand);
-            }
+            filteredProducts = products.filter(p => p.brandId === selectedBrand);
 
             const prices = filteredProducts.map(p => p.price);
 
@@ -44,8 +42,7 @@ export const PriceSlider = ({
                 minPrice: Math.min(...prices),
                 maxPrice: Math.max(...prices)
             };
-        }
-        else{
+        } else {
             const prices = products.map(p => p.price);
 
             if (prices.length === 0) {
@@ -63,7 +60,7 @@ export const PriceSlider = ({
     }, [products, selectedBrand]);
 
     useEffect(() => {
-        if(prevBrandId !== null && selectedBrand === null) setCurrentPrice(0)
+        if (prevBrandId !== null && selectedBrand === null) setCurrentPrice(0)
     }, [selectedBrand, prevBrandId]);
 
 

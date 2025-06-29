@@ -1,7 +1,7 @@
 import type {Metadata} from "next";
 import "./globals.css";
 import React from "react";
-import {ClientRootLayout} from "@/app/components/ClientRootLayout";
+import {ClientRootLayout} from "@/app/components/layouts/ClientRootLayout";
 
 
 export const metadata: Metadata = {

@@ -1,12 +1,10 @@
-import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-const baseQuery = fetchBaseQuery({
-    baseUrl: 'https://localhost:5001/',
-});
+const baseUrl =process.env.NEXT_PUBLIC_API_URL;
 
 export const apiSlice = createApi({
     reducerPath: 'api',
-    baseQuery: baseQuery,
-    tagTypes:['Brands', 'Products', 'Coins'],
+    baseQuery: fetchBaseQuery({ baseUrl }),
+    tagTypes: ['Brands', 'Products', 'Coins'],
     endpoints: () => ({}),
 });

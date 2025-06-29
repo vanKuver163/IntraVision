@@ -10,4 +10,12 @@ export type Product = {
     brand: Brand,
 }
 
+export interface ProductImportData {
+    name: string;
+    price: number;
+    quantity: number;
+    imagePath: string;
+    brand: string;
+}
+
 

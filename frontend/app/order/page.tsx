@@ -1,6 +1,6 @@
 'use client'
 import React from "react";
-import {OrderTable} from "@/app/components/OrderTable";
+import {OrderTable} from "@/app/components/order/OrderTable";
 import {useAppSelector} from "@/app/hooks";
 import {selectTotalPrice} from "@/app/features/cart/cartSlice";
 import Link from "next/link";
@@ -27,14 +27,14 @@ const OrderPage = () => {
             }
             <div className="w-full flex flex-row items-center justify-center gap-2 md:gap-4">
                 <div className="flex-1 flex flex-col items-start">
-                    <Link href="/home" className="p-2 w-full max-w-[300px] flex flex-row items-center justify-center bg-yellow-400 hover:bg-yellow-500 cursor-pointer rounded-xl">
-                            <p className="text-xl font-semibold">Вернуться</p>
+                    <Link href="/home" className="p-2 w-full max-w-[300px] flex flex-row items-center justify-center bg-[#f1c232] hover:bg-yellow-500 cursor-pointer">
+                            <p className="text-lg font-semibold">Вернуться</p>
                     </Link>
                 </div>
                 {totalPrice !== 0 &&
                     <div className="flex-1 flex flex-col items-end">
-                        <Link href="/payment"  className="p-2 w-full flex flex-row items-center justify-center max-w-[300px] bg-green-500 hover:bg-green-600 cursor-pointer rounded-xl">
-                            <p className="text-xl t text-white font-semibold">Оплата</p>
+                        <Link href="/payment"  className="p-2 w-full flex flex-row items-center justify-center max-w-[300px] bg-[#6aa84f] hover:bg-green-600 cursor-pointer">
+                            <p className="text-lg text-white font-semibold">Оплата</p>
                         </Link>
                     </div>
                 }

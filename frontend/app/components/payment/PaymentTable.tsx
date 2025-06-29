@@ -1,7 +1,7 @@
 'use client'
 import React, {useEffect} from "react";
 import {useGetCoinsQuery} from "@/app/features/payment/paymentApi";
-import {PaymentItem} from "@/app/components/PaymentItem";
+import {PaymentItem} from "@/app/components/payment/PaymentItem";
 import {useDispatch} from "react-redux";
 import {addToBank, selectCoinItems} from "@/app/features/coin/coinSlice";
 import {useAppSelector} from "@/app/hooks";
@@ -41,9 +41,9 @@ export const PaymentTable = () => {
             <table className="w-full border-collapse">
                 <thead>
                 <tr>
-                    <th className="px-4 py-2 text-left border-b border-gray-300">Номинал</th>
-                    <th className="px-4 py-2 text-left border-b border-gray-300">Количество</th>
-                    <th className="px-4 py-2 text-left border-b border-gray-300">Сумма</th>
+                    <th className="px-4 py-2 text-left border-b border-gray-300 flex-1">Номинал</th>
+                    <th className="px-4 py-2 text-left border-b border-gray-300 flex-1">Количество</th>
+                    <th className="px-4 py-2 text-left border-b border-gray-300 flex-1 w-40">Сумма</th>
                 </tr>
                 </thead>
                 <tbody>

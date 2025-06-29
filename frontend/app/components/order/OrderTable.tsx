@@ -1,7 +1,7 @@
 'use client'
 import {useAppSelector} from "@/app/hooks";
 import {selectCartItems} from "@/app/features/cart/cartSlice";
-import {OrderItem} from "@/app/components/OrderItem";
+import {OrderItem} from "@/app/components/order/OrderItem";
 import React from "react";
 
 export const OrderTable = () => {
@@ -12,10 +12,10 @@ export const OrderTable = () => {
             <table className="w-full border-collapse">
                 <thead>
                 <tr>
-                    <th className="px-4 py-2 text-left border-b border-gray-300">Товар</th>
-                    <th className="px-4 py-2 text-left border-b border-gray-300">Количество</th>
-                    <th className="px-4 py-2 text-left border-b border-gray-300">Цена</th>
-                    <th className="px-4 py-2 text-left border-b border-gray-300"></th>
+                    <th className="px-4 py-2 text-left border-b border-gray-300 flex-1">Товар</th>
+                    <th className="px-4 py-2 text-left border-b border-gray-300 flex-1">Количество</th>
+                    <th className="px-4 py-2 text-left border-b border-gray-300 flex-1 w-40">Цена</th>
+                    <th className="px-4 py-2 text-left border-b border-gray-300 flex-1"></th>
                 </tr>
                 </thead>
                 <tbody>

@@ -28,15 +28,23 @@ export const NumberInput = ({
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const val = e.target.value;
-        setInputValue(val);
-        if (/^\d*$/.test(val)) {
-            const numValue = parseInt(val, 10) || min;
-            const upperLimit = max !== null ? Math.min(numValue, max) : numValue;
-            onChangeAction(id, Math.max(upperLimit, min));
+        if (val === '' || /^[0-9]+$/.test(val)) {
+            setInputValue(val);
+
+            if (val !== '') {
+                const numValue = parseInt(val, 10);
+                const upperLimit = max !== null ? Math.min(numValue, max) : numValue;
+                onChangeAction(id, Math.max(upperLimit, min));
+            }
         }
     };
 
     const handleBlur = () => {
+        if (inputValue === '') {
+            setInputValue(min.toString());
+            onChangeAction(id, min);
+            return;
+        }
         const numValue = parseInt(inputValue, 10) || min;
         const upperLimit = max !== null ? Math.min(numValue, max) : numValue;
         const clampedValue = Math.max(upperLimit, min);
@@ -56,11 +64,11 @@ export const NumberInput = ({
 
     return (
         <div className="w-full flex flex-col items-start justify-center px-4">
-            <div className='flex items-center border rounded-md overflow-hidden w-32'>
+            <div className="flex items-center gap-2">
                 <button
                     onClick={decrement}
                     disabled={value <= min}
-                    className="flex items-center justify-center px-4 py-2 w-10  cursor-pointer hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="flex items-center justify-center px-4 py-2 w-10 border border-gray-300 dark:border-gray-600 cursor-pointer text-white bg-black hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed dark:bg-gray-800 dark:hover:bg-gray-700"
                 >
                     -
                 </button>
@@ -71,7 +79,8 @@ export const NumberInput = ({
                     value={inputValue}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    className="w-12 text-center border-x outline-none px-2 py-2"
+                    className="w-20 text-center border border-gray-300 dark:border-gray-600 outline-none px-2 py-2 bg-white dark:bg-gray-800 dark:text-white"
+                    inputMode="numeric"
                     min={min}
                     max={max || undefined}
                     pattern="[0-9]*"
@@ -80,7 +89,7 @@ export const NumberInput = ({
                 <button
                     onClick={increment}
                     disabled={max !== null && value >= max}
-                    className="flex items-center justify-center px-4 py-2 w-10 bg-gray-100 cursor-pointer hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="flex items-center justify-center px-4 py-2 w-10 border border-gray-300 dark:border-gray-600 text-white bg-black hover:bg-gray-600 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed dark:bg-gray-800 dark:hover:bg-gray-700"
                 >
                     +
                 </button>

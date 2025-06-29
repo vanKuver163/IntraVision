@@ -1,9 +1,9 @@
 'use client'
 import React, {useState} from "react";
-import {SelectBrand} from "@/app/components/SelectBrand";
-import {PriceSlider} from "@/app/components/PriceSlider";
-import {ButtonPanel} from "@/app/components/ButtonPanel";
-import {ProductsList} from "@/app/components/ProductsList";
+import {SelectBrand} from "@/app/components/filters/SelectBrand";
+import {PriceSlider} from "@/app/components/filters/PriceSlider";
+import {ButtonPanel} from "@/app/components/buttons/ButtonPanel";
+import {ProductsList} from "@/app/components/product/ProductsList";
 import {useGetProductsQuery} from "@/app/features/product/productApi";
 
 const HomePage = () => {

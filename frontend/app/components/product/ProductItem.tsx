@@ -11,7 +11,7 @@ interface ProductItemsProps {
 export const ProductItems = ({product}: ProductItemsProps) => {
     const dispatch = useDispatch();
     const cartItems = useAppSelector(selectCartItems);
-    const imageUrl = `https://localhost:5001${product.imagePath}`
+    const imageUrl = `${process.env.NEXT_PUBLIC_API_URL}${product.imagePath}`;
 
     const handleAddToCart = () => {
         dispatch(addToCart(product));
@@ -20,7 +20,7 @@ export const ProductItems = ({product}: ProductItemsProps) => {
     const isInCart = cartItems.some(item => item.product.id === product.id);
 
     return (
-        <div className="w-full flex flex-col items-center justify-center gap-2 border-gray-300 border-2 p-4 rounded-lg">
+        <div className="w-full flex flex-col items-center justify-center gap-2 border-gray-300 border-2 p-4">
             <div className="relative w-full h-48 mb-3">
                 <Image
                     src={imageUrl}
@@ -37,19 +37,19 @@ export const ProductItems = ({product}: ProductItemsProps) => {
             <button
                 onClick={handleAddToCart}
                 disabled={isInCart || product.quantity == 0}
-                className={`w-full p-2 rounded-lg transition-colors ${
+                className={`w-full p-2 transition-colors ${
                     product.quantity === 0
                         ? 'bg-gray-400 text-black cursor-default'
                         : isInCart
-                            ? 'bg-green-500 text-white cursor-default'
-                            : 'bg-yellow-400 hover:bg-yellow-500 cursor-pointer'
+                            ? 'bg-[#6aa84f] text-white cursor-default'
+                            : 'bg-[#f1c232] hover:bg-yellow-500 cursor-pointer'
                 }`}
             >
                 <p className="font-semibold">
                     {product.quantity === 0
                         ? 'Закончился'
                         : isInCart
-                            ? 'В корзине ✓'
+                            ? 'Выбрано'
                             : 'Выбрать'
                     }
                 </p>

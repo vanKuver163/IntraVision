@@ -10,9 +10,6 @@ public class ProductService(IRepository<Product> repository, ILogger<ProductServ
     public async Task<IEnumerable<Product>> GetProductsAsync() =>
         await repository.GetAllAsync(null, p => p.OrderBy(c => c.Name), p => p.Brand!);
 
-    public async Task<IEnumerable<Product>> GetProductsByBrandAsync(int brandId) =>
-        await repository.GetAllAsync(p => p.BrandId == brandId, null, p => p.Brand!);
-
     public async Task<OperationResult> DeductProductsAsync(List<CartItem> products)
     {
         try
@@ -80,5 +77,23 @@ public class ProductService(IRepository<Product> repository, ILogger<ProductServ
             logger.LogError(ex, "Ошибка при обновлении количества продукта");
             return OperationResult<Product>.Fail("Ошибка при обновлении количества продукта");
         }
+    }
+    
+    public async Task<IEnumerable<Product>> GetFilteredProductsAsync(int? brandId, decimal minPrice)
+    {
+        var products = await repository.GetAllAsync(includes: p=>p.Brand!);
+    
+        var query = products.AsQueryable();
+    
+        if (brandId.HasValue)
+        {
+            query = query.Where(p => p.BrandId == brandId.Value);
+        }
+
+        if (minPrice > 0)
+        {
+            query = query.Where(p => p.Price >= minPrice);
+        }
+        return query.ToList();
     }
 }

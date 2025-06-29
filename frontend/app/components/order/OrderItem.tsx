@@ -2,16 +2,19 @@ import {CartItem} from "@/app/features/cart/type";
 import Image from "next/image";
 import {BsTrash} from "react-icons/bs";
 import {useDispatch} from "react-redux";
-import {removeFromCart, updateQuantity} from "@/app/features/cart/cartSlice";
-import {NumberInput} from "@/app/components/NumberInput";
+import {removeFromCart, selectItemQuantity, updateQuantity} from "@/app/features/cart/cartSlice";
+import {NumberInput} from "@/app/components/inputs/NumberInput";
+import {useAppSelector} from "@/app/hooks";
 
 interface OrderItemsProps {
     orderItem: CartItem;
 }
 
 export const OrderItem = ({orderItem}: OrderItemsProps) => {
-    const imageUrl = `https://localhost:5001${orderItem.product.imagePath}`
+    const imageUrl = `${process.env.NEXT_PUBLIC_API_URL}${orderItem.product.imagePath}`;
     const dispatch = useDispatch();
+
+    const quantity = useAppSelector(selectItemQuantity(orderItem.product.id));
 
     const handleRemoveFromCart = () => {
         dispatch(removeFromCart(orderItem.product.id));
@@ -46,7 +49,7 @@ export const OrderItem = ({orderItem}: OrderItemsProps) => {
                     onChangeAction={handleUpdateQuantity}
                 />
             </td>
-            <td className="px-4 py-2 text-left font-semibold">{orderItem.product.price} руб.</td>
+            <td className="px-4 py-2 text-left font-semibold">{orderItem.product.price*quantity} руб.</td>
             <td className="px-4 py-2">
                 <div className="flex items-center justify-end w-full ">
                     <button className="p-2 cursor-pointer hover:opacity-60"

@@ -1,5 +1,5 @@
 import {apiSlice} from "@/app/api/apiSlice";
-import {Product} from "@/app/features/product/type";
+import {Product, ProductImportData} from "@/app/features/product/type";
 
 export const productApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
@@ -15,8 +15,19 @@ export const productApi = apiSlice.injectEndpoints({
                 }
             }),
             providesTags: ['Products']
+        }),
+        importProducts: builder.mutation<
+            { successCount: number; errorCount: number },
+            ProductImportData[]
+        >({
+            query: (products) => ({
+                url: '/api/products/import',
+                method: 'POST',
+                body: { products }
+            }),
+            invalidatesTags: ['Products', 'Brands']
         })
     })
 });
 
-export const {useGetProductsQuery} = productApi;
+export const {useGetProductsQuery, useImportProductsMutation} = productApi;

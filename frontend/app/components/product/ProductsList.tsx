@@ -1,5 +1,5 @@
 
-import {ProductItems} from "@/app/components/ProductItem";
+import {ProductItems} from "@/app/components/product/ProductItem";
 import {Product} from "@/app/features/product/type";
 
 interface ProductsListProps {

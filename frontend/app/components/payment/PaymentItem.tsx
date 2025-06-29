@@ -1,4 +1,4 @@
-import {NumberInput} from "@/app/components/NumberInput";
+import {NumberInput} from "@/app/components/inputs/NumberInput";
 import {CoinItem} from "@/app/features/coin/type";
 import {selectCoinsByDenomination, updateQuantity} from "@/app/features/coin/coinSlice";
 import {useDispatch} from "react-redux";
@@ -21,7 +21,7 @@ export const PaymentItem = ({coinItem}: PaymentItemProps) => {
         <tr className="align-top">
             <td className="px-2 py-2 md:px-4">
                 <div className="flex items-center w-full">
-                    <div className="min-w-[60px] w-14 h-14 md:w-20 md:h-20 aspect-square bg-gray-300 border-2 border-black rounded-full flex-none flex items-center justify-center">
+                    <div className="min-w-[60px] w-14 h-14 md:w-20 md:h-20 aspect-square bg-[#eeeeee] border-2 border-[#c1c1c1] rounded-full flex-none flex items-center justify-center">
                         <p className="text-lg md:text-2xl font-semibold">{coinItem.coin.denomination}</p>
                     </div>
                     <p className="ml-2 md:ml-4 py-2 text-left font-semibold">

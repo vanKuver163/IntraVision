@@ -1,6 +1,6 @@
 'use client'
 import React, {useState} from "react";
-import {PaymentTable} from "@/app/components/PaymentTable";
+import {PaymentTable} from "@/app/components/payment/PaymentTable";
 import {useAppSelector} from "@/app/hooks";
 import {resetCart, selectCartItems, selectTotalPrice} from "@/app/features/cart/cartSlice";
 import {
@@ -81,16 +81,17 @@ const PaymentPage = () => {
             <div className="w-full flex flex-row items-center justify-center gap-2 md:gap-4">
                 <div className="flex-1 flex flex-col items-start">
                     <Link href="/order"
-                          className="p-2 w-full max-w-[300px] flex flex-row items-center justify-center bg-yellow-400 hover:bg-yellow-500 cursor-pointer rounded-xl">
-                        <p className="text-xl font-semibold">Вернуться</p>
+                          className="p-2 w-full max-w-[300px] flex flex-row items-center justify-center bg-[#f1c232] hover:bg-yellow-500 cursor-pointer">
+                        <p className="text-lg font-semibold">Вернуться</p>
                     </Link>
                 </div>
                 {totalPrice !== 0 &&
                     <div className="flex-1 flex flex-col items-end">
                         <button
-                            className="p-2 w-full flex flex-row items-center justify-center max-w-[300px] bg-green-500 hover:bg-green-600 cursor-pointer rounded-xl"
+                            className="p-2 w-full flex flex-row items-center justify-center max-w-[300px] bg-[#6aa84f] disabled:opacity-50 hover:bg-green-600 cursor-pointer"
+                            disabled={totalSumCoin < totalPrice}
                             onClick={handlePayment}>
-                            <p className="text-xl t text-white font-semibold">Оплатить</p>
+                            <p className="text-lg t text-white font-semibold">Оплатить</p>
                         </button>
                     </div>
                 }

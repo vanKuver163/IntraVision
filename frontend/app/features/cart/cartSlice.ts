@@ -68,5 +68,10 @@ export const selectTotalPrice = (state: RootState) =>
         (total: number, item: CartItem) => total + item.product.price * item.quantity,
         0
     );
+export const selectItemQuantity = (productId: number) => (state: RootState) => {
+    const item = state.cart.items.find(item => item.product.id === productId);
+    return item ? item.quantity : 0;
+};
+
 export const {addToCart, removeFromCart, updateQuantity, resetCart} = cartSlice.actions;
 export default cartSlice.reducer;
