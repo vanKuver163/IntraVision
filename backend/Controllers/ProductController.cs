@@ -1,5 +1,6 @@
 using backend.DTOs;
 using backend.Services;
+using backend.Utils;
 using Microsoft.AspNetCore.Mvc;
 
 namespace backend.Controllers;
@@ -26,6 +27,30 @@ public class ProductController(IProductService productService, ILogger<ProductCo
         {
             logger.LogError(ex, "Ошибка при обновлении количества продукта");
             return StatusCode(500, "Произошла ошибка на сервере");
+        }
+    }
+    
+    [HttpPost]
+    [Route("import")]
+    public async Task<ImportResponse> ImportProducts(
+        [FromBody] ImportProductRequest[] request)
+    {
+        try
+        {
+            var result = await productService.ImportProductsAsync(request.ToList());
+            return new ImportResponse
+            {
+                SuccessResult = result.SuccessResult,
+                ErrorMessage = result.SuccessResult ? null : result.ErrorMessage
+            };
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, "Ошибка при импорте продуктов");
+            return new ImportResponse() {
+                SuccessResult = false,
+                ErrorMessage = ex.Message
+            };
         }
     }
 }

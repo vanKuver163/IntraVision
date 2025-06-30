@@ -17,13 +17,13 @@ export const productApi = apiSlice.injectEndpoints({
             providesTags: ['Products']
         }),
         importProducts: builder.mutation<
-            { successCount: number; errorCount: number },
+            { successResult: boolean; errorMessage: number },
             ProductImportData[]
         >({
             query: (products) => ({
-                url: '/api/products/import',
+                url: '/api/product/import',
                 method: 'POST',
-                body: { products }
+                body: products
             }),
             invalidatesTags: ['Products', 'Brands']
         })

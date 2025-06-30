@@ -10,4 +10,5 @@ public interface IProductService
     Task<OperationResult> DeductProductsAsync(List<CartItem> productsToDeduct);
     Task<OperationResult<Product>> UpdateQuantityProduct(int quantity, int? productId = null, string? productName = null);
     Task<IEnumerable<Product>> GetFilteredProductsAsync(int? brandId, decimal minPrice);
+    Task<OperationResult> ImportProductsAsync(List<ImportProductRequest> importProducts);
 }

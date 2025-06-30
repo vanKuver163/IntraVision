@@ -52,10 +52,20 @@ public class Repository<T>(IDbContextFactory<ApplicationDbContext> dbContextFact
         await context.SaveChangesAsync();
     }
 
-    public async  Task<T?> FirstOrDefaultAsync(Expression<Func<T, bool>> predicate)
+    public async Task<T?> FirstOrDefaultAsync(
+        Expression<Func<T, bool>> predicate,
+        Func<IQueryable<T>, IQueryable<T>>? includes = null)
     {
         await using var context = await dbContextFactory.CreateDbContextAsync();
-        return await context.Set<T>().FirstOrDefaultAsync(predicate);
+    
+        var query = context.Set<T>().AsQueryable();
+    
+        if (includes != null)
+        {
+            query = includes(query);
+        }
+    
+        return await query.FirstOrDefaultAsync(predicate);
     }
     
     public async Task UpdateRangeAsync(IEnumerable<T> entities)

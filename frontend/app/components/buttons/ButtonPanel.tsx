@@ -61,7 +61,6 @@ export const ButtonPanel = ({products}: ButtonPanelProps) => {
 
                     const productsToImport: ProductImportData[] = jsonData
                         .map((item, index) => {
-                            // Базовые проверки
                             if (!item.Name || !item.Brand || isNaN(Number(item.Price))) {
                                 console.warn(`Пропущена строка ${index + 2}: невалидные данные`);
                                 return null;
@@ -84,11 +83,11 @@ export const ButtonPanel = ({products}: ButtonPanelProps) => {
 
                     try {
                         const result = await importProducts(productsToImport).unwrap();
-                        if (result.successCount > 0) {
-                            alert(`Успешно импортировано ${result.successCount} товаров`);
+                        if (result.successResult) {
+                            alert('Товары успешно импортированы');
                         }
-                        if (result.errorCount > 0) {
-                            alert(`${result.errorCount} товаров не были обработаны`);
+                        if (!result.successResult) {
+                            alert(`$Ошибка: {result.errorMessage}`);
                         }
                     } catch (err) {
                         console.error("Ошибка API:", err);
